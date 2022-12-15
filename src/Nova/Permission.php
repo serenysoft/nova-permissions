@@ -18,18 +18,11 @@ class Permission extends Resource
 {
 
     /**
-     * Indicates if the guard name field should be available.
+     * The list of field name that should be hidden
      *
-     * @var bool
+     * @var string[]
      */
-    public static $showRoles = true;
-
-    /**
-     * The logical group associated with the resource.
-     *
-     * @var string
-     */
-    public static $group = null;
+    public static $hiddenFields = [];
 
     /**
      * The model the resource corresponds to.
@@ -66,34 +59,37 @@ class Permission extends Resource
         $userResource = Nova::resourceForModel(getModelForGuard($this->guard_name));
 
         return [
-            ID::make('Id', 'id')
+            ID::make(__('ID'), 'id')
                 ->rules('required')
-                ->hideFromIndex()
-            ,
+                ->canSee(function ($request) {
+                    return $this->fieldAvailable('id');
+                }),
+
             Text::make(__('Name'), 'name')
                 ->rules(['required', 'string', 'max:255'])
                 ->creationRules('unique:' . config('permission.table_names.permissions'))
                 ->updateRules('unique:' . config('permission.table_names.permissions') . ',name,{{resourceId}}'),
 
-            Text::make(__('Group'), 'group'),
+            Text::make(__('Group'), 'group')
+                ->rules(['required', 'string', 'max:255']),
 
             Select::make(__('Guard Name'), 'guard_name')
                 ->options($guardOptions->toArray())
                 ->rules(['required', Rule::in($guardOptions)])
+                ->default($this->defaultGuard($guardOptions))
                 ->canSee(function ($request) {
-                    return static::$showGuardName;
-                })
-                ->default($this->defaultGuard($guardOptions)),
+                    return $this->fieldAvailable('guard_name');
+                }),
 
             BelongsToMany::make(__('Roles'), 'roles', Role::class)
                 ->canSee(function ($request) {
-                    return static::$showRoles;
+                    return $this->fieldAvailable('roles');
                 }),
 
             MorphToMany::make($userResource::label(), 'users', $userResource)
                 ->searchable()
                 ->canSee(function ($request) {
-                    return static::$showUsers;
+                    return $this->fieldAvailable('users');
                 }),
         ];
     }

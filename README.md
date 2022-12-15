@@ -249,10 +249,17 @@ public function tools()
     return [
         // ...
         \Sereny\NovaPermissions\NovaPermissions::make()
-            ->hideGuardNameFromRole()
-            ->hideGuardNameFromPermission()
-            ->hideUsersFromPermission()
-            ->hideRolesFromPermission()
+            ->disablePermissions()
+            ->hideFieldsFromRole([
+                'id',
+                'guard_name'
+            ])
+            ->hideFieldsFromPermission([
+                'id',
+                'guard_name',
+                'users',
+                'roles'
+            ])
             ->resolveGuardsUsing(function($request) {
                 return [ 'web' ];
             })

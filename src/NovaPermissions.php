@@ -37,6 +37,11 @@ class NovaPermissions extends Tool
     public $permissionPolicy = PermissionPolicy::class;
 
     /**
+     * @var bool
+     */
+    public $displayPermissions = true;
+
+    /**
      * Perform any tasks that need to happen when the tool is booted.
      *
      * @return void
@@ -68,46 +73,38 @@ class NovaPermissions extends Tool
     }
 
     /**
-     * Specify that the guard name should be hidden from role resource.
+     * Determines the hidden fields from Role
      *
+     * @param string[] $fields
      * @return $this
      */
-    public function hideGuardNameFromRole()
+    public function hideFieldsFromRole($fields)
     {
-        $this->roleResource::$showGuardName = false;
+        $this->roleResource::$hiddenFields = $fields;
         return $this;
     }
 
     /**
-     * Specify that the guard name should be hidden from permission resource.
+     * Determines the hidden fields from Permission
      *
+     * @param string[] $fields
      * @return $this
      */
-    public function hideGuardNameFromPermission()
+    public function hideFieldsFromPermission($fields)
     {
-        $this->permissionResource::$showGuardName = false;
+        $this->permissionResource::$hiddenFields = $fields;
         return $this;
     }
 
     /**
-     * Specify that the users relationship should be hidden from permission resource.
+     * Determines if the permission resource is disabled from menu
      *
+     * @param bool $value
      * @return $this
      */
-    public function hideUsersFromPermission()
+    public function disablePermissions()
     {
-        $this->permissionResource::$showUsers = false;
-        return $this;
-    }
-
-    /**
-     * Specify that the roles relationship should be hidden from permission resource.
-     *
-     * @return $this
-     */
-    public function hideRolesFromPermission()
-    {
-        $this->permissionResource::$showRoles = false;
+        $this->displayPermissions = false;
         return $this;
     }
 
@@ -121,20 +118,21 @@ class NovaPermissions extends Tool
     {
         return MenuSection::make(__('Roles & Permissions'), [
             $this->makeMenuItem($this->roleResource),
-            $this->makeMenuItem($this->permissionResource)
+            $this->makeMenuItem($this->permissionResource, $this->displayPermissions)
         ])->icon('shield-check');
     }
 
     /**
+     * @param  bool $disabled
      * @param  class-string<\Laravel\Nova\Resource>  $resourceClass
      * @return void
      */
-    protected function makeMenuItem($resourceClass)
+    protected function makeMenuItem($resourceClass, $displayInNavigation = true)
     {
         return MenuItem::make($resourceClass::label())
             ->path('/resources/'.$resourceClass::uriKey())
-            ->canSee(function ($request) use ($resourceClass) {
-                return $resourceClass::authorizedToViewAny($request);
+            ->canSee(function ($request) use ($resourceClass, $displayInNavigation) {
+                return $displayInNavigation && $resourceClass::authorizedToViewAny($request);
             });
     }
 }

@@ -15,6 +15,13 @@ class Role extends Resource
 {
 
     /**
+     * The list of field name that should be hidden
+     *
+     * @var string[]
+     */
+    public static $hiddenFields = [];
+
+    /**
      * The model the resource corresponds to.
      *
      * @var string
@@ -51,7 +58,9 @@ class Role extends Resource
         return [
             ID::make(__('ID'), 'id')
                 ->rules('required')
-                ->hideFromIndex(),
+                ->canSee(function ($request) {
+                    return $this->fieldAvailable('id');
+                }),
 
             Text::make(__('Name'), 'name')
                 ->rules(['required', 'string', 'max:255'])
@@ -62,7 +71,7 @@ class Role extends Resource
                 ->options($guardOptions->toArray())
                 ->rules(['required', Rule::in($guardOptions)])
                 ->canSee(function ($request) {
-                    return static::$showGuardName;
+                    return $this->fieldAvailable('guard_name');
                 })
                 ->default($this->defaultGuard($guardOptions)),
 
@@ -82,7 +91,10 @@ class Role extends Resource
             })->exceptOnForms(),
 
             MorphToMany::make($userResource::label(), 'users', $userResource)
-                ->searchable(),
+                ->searchable()
+                ->canSee(function ($request) {
+                    return $this->fieldAvailable('users');
+                }),
         ];
     }
 

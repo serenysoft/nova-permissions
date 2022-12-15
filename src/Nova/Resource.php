@@ -4,6 +4,9 @@ namespace Sereny\NovaPermissions\Nova;
 
 use Laravel\Nova\Resource as NovaResource;
 
+/**
+ * @property static string[] $hiddenFields
+ */
 abstract class Resource extends NovaResource
 {
     /**
@@ -12,20 +15,6 @@ abstract class Resource extends NovaResource
      * @var bool
      */
     public static $displayInNavigation = false;
-
-    /**
-     * Indicates if the guard name field should be available.
-     *
-     * @var bool
-     */
-    public static $showGuardName = true;
-
-    /**
-     * Indicates if the guard name field should be available.
-     *
-     * @var bool
-     */
-    public static $showUsers = true;
 
     /**
      * The callback that should be used to resolve guards that can be used.
@@ -71,6 +60,18 @@ abstract class Resource extends NovaResource
         return collect($this->guards($request))->mapWithKeys(function ($value) {
             return [$value => __($value)];
         });
+    }
+
+
+    /**
+     * Determines if the field is available
+     *
+     * @param string $name
+     * @return bool
+     */
+    protected function fieldAvailable($name)
+    {
+        return ! in_array($name, static::$hiddenFields);
     }
 
 }
