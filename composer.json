@@ -1,0 +1,39 @@
+{
+    "name": "sereny/nova-permissions",
+    "description": "A Laravel Nova tool.",
+    "keywords": [
+        "laravel",
+        "nova"
+    ],
+    "repositories": [
+      {
+          "type": "composer",
+          "url": "https://nova.laravel.com"
+      }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.3|^8.0",
+        "laravel/nova": "~4.0",
+        "spatie/laravel-permission": "^5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sereny\\NovaPermissions\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sereny\\NovaPermissions\\ToolServiceProvider"
+            ]
+        },
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "prefer-stable": true
+}
