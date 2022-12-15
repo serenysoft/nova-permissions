@@ -1,6 +1,6 @@
-# Laravel Nova 4 Grouped Permissions
+# Laravel Nova 4 Roles & Permissions
 
-A Laravel Nova Tool that allows you to group your Permissions into Groups and attach it to Users. It uses Spatie's laravel-permission.
+A Laravel Nova Tool that allows you to group your Permissions and attach it to Users. It uses Spatie's laravel-permission.
 
 We have a Migration, Seed, Policy and Resource ready for a good Authorization Experience.
 

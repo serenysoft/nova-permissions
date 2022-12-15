@@ -23,7 +23,7 @@
     ],
     "require": {
         "php": "^7.3|^8.0",
-        "laravel/nova": "~4.0",
+        "laravel/nova": "^4.0",
         "spatie/laravel-permission": "^5.7"
     },
     "autoload": {
