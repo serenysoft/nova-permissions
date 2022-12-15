@@ -3,7 +3,7 @@
     <template #value>
       <div class="grid gap-4">
         <div v-for="(permissions, group) in field.options" :key="group">
-          <h1 class='font-normal text-xl md:text-xl mb-1 mt-2'>
+          <h1 class='font-normal text-lg mb-1 mt-2'>
             {{ __(group) }}
           </h1>
           <div class="grid grid-cols-4 gap-4">

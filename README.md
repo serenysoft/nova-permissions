@@ -270,4 +270,5 @@ public function tools()
 ## Credits
 
 This Package is inspired by [eminiarts/nova-permissions](https://github.com/eminiarts/nova-permissions).
+
 A huge thanks goes to Spatie [spatie/laravel-permission](https://github.com/spatie/laravel-permission) for their amazing work!

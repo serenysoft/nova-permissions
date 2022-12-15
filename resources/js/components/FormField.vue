@@ -8,7 +8,7 @@
     <template #field>
       <div class="w-full">
         <div v-for="(permissions, group) in field.options" :key="group" class="mb-4">
-          <h1 class="font-normal text-xl md:text-xl mb-3 my-2">
+          <h1 class="font-normal text-lg mb-3 my-2">
             <checkbox :checked="isGroupChecked(group)" @click="toggleGroup(group)"/>
             <label class="w-full ml-1" @click="toggleGroup(group)">
               {{ __(group) }}
