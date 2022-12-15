@@ -25,13 +25,6 @@ class Permission extends Resource
     public static $showRoles = true;
 
     /**
-     * Indicates if the resource should be displayed in the sidebar.
-     *
-     * @var bool
-     */
-    public static $displayInNavigation = false;
-
-    /**
      * The logical group associated with the resource.
      *
      * @var string
