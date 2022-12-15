@@ -119,7 +119,7 @@ class NovaPermissions extends Tool
      */
     public function menu(Request $request)
     {
-        return MenuSection::make(__('Permissions'), [
+        return MenuSection::make(__('Roles & Permissions'), [
             $this->makeMenuItem($this->roleResource),
             $this->makeMenuItem($this->permissionResource)
         ])->icon('shield-check');

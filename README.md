@@ -6,6 +6,7 @@ We have a Migration, Seed, Policy and Resource ready for a good Authorization Ex
 
 1. [Installation](#Installation)
 2. [Permissions with Groups](#permissions-with-groups)
+    * [Index view](#index-view)
     * [Detail View](#detail-view)
     * [Edit View](#edit-view)
     * [Database Seeding](#database-seeding)
@@ -106,13 +107,17 @@ A new menu item called **Roles & Permissions** will appear in your Nova app afte
 
 ## Permissions with Groups
 
+### Index View
+
+![image](/.github/images/role-index.png)
+
 ### Detail View
 
-![image](https://user-images.githubusercontent.com/3426944/50088581-b1a44100-0203-11e9-8ae8-c21cc0b02393.png)
+![image](/.github/images/role-detail.png)
 
 ### Edit View
 
-![image](https://user-images.githubusercontent.com/3426944/50088682-0051db00-0204-11e9-8201-1ac4b57f0631.png)
+![image](/.github/images/role-edit.png)
 
 
 ### Database Seeding
