@@ -67,7 +67,6 @@ class Role extends Resource
                 ->default($this->defaultGuard($guardOptions)),
 
             Checkboxes::make(__('Permissions'), 'prepared_permissions')
-                ->withGroups()
                 ->options($this->loadPermissions()->map(function ($permission, $key) {
                     return [
                         'group'  => __(ucfirst($permission->group)),

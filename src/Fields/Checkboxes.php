@@ -26,14 +26,6 @@ class Checkboxes extends Field
     }
 
     /**
-     * Disable type casting of array keys to numeric values to return the unmodified keys.
-     */
-    public function withGroups()
-    {
-        return $this->withMeta(['withGroups' => true]);
-    }
-
-    /**
      * Hydrate the given attribute on the model based on the incoming request.
      *
      * @param  \Laravel\Nova\Http\Requests\NovaRequest $request
