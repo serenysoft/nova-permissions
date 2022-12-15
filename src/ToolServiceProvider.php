@@ -59,10 +59,10 @@ class ToolServiceProvider extends ServiceProvider
             return;
         }
 
-        Nova::router(['nova'], 'nova-permissions')
+        Nova::router(['nova', Authenticate::class], 'nova-permissions')
             ->group(__DIR__.'/../routes/inertia.php');
 
-        Route::middleware(['nova'])
+        Route::middleware(['nova', Authenticate::class])
             ->prefix('sereny/nova-permissions')
             ->group(__DIR__.'/../routes/api.php');
     }
