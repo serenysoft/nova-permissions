@@ -78,7 +78,7 @@ abstract class Resource extends NovaResource
      */
     protected function userResource()
     {
-        $model =static::$resolveGuardsCallback
+        $model = static::$resolveGuardsCallback
             ? call_user_func(static::$resolveUserModelCallback)
             : getModelForGuard($this->guard_name);
 
