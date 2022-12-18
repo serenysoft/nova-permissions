@@ -2,6 +2,7 @@
 
 namespace Sereny\NovaPermissions\Nova;
 
+use Laravel\Nova\Nova;
 use Laravel\Nova\Resource as NovaResource;
 
 /**
@@ -22,6 +23,14 @@ abstract class Resource extends NovaResource
      * @var \Closure|null
      */
     public static $resolveGuardsCallback;
+
+
+    /**
+     * The callback that should be used to resolve user model.
+     *
+     * @var \Closure|null
+     */
+    public static $resolveUserModelCallback;
 
     /**
      * Get the available guards.
@@ -62,6 +71,19 @@ abstract class Resource extends NovaResource
         });
     }
 
+    /**
+     * Determines the user resource
+     *
+     * @return bool
+     */
+    protected function userResource()
+    {
+        $model =static::$resolveGuardsCallback
+            ? call_user_func(static::$resolveUserModelCallback)
+            : getModelForGuard($this->guard_name);
+
+        return Nova::resourceForModel($model);
+    }
 
     /**
      * Determines if the field is available

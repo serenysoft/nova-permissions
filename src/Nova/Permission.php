@@ -56,7 +56,7 @@ class Permission extends Resource
     public function fields(Request $request)
     {
         $guardOptions = $this->guardOptions($request);
-        $userResource = Nova::resourceForModel(getModelForGuard($this->guard_name));
+        $userResource = $this->userResource();
 
         return [
             ID::make(__('ID'), 'id')

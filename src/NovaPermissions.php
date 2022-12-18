@@ -73,6 +73,18 @@ class NovaPermissions extends Tool
     }
 
     /**
+     * Set a callback that should be used to define the user model
+     *
+     * @param  \Closure  $callback
+     * @return $this
+     */
+    public function resolveUserModelUsing($callback)
+    {
+        Resource::$resolveUserModelCallback = $callback;
+        return $this;
+    }
+
+    /**
      * Determines the hidden fields from Role
      *
      * @param string[] $fields
