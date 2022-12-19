@@ -151,24 +151,23 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         $collection = collect([
-            'invoices',
-            'clients',
-            'contacts',
-            'payments',
-            'teams',
-            'users',
-            'roles',
+            'Invoice',
+            'Client',
+            'Contact',
+            'Payment',
+            'Team',
+            'User',
+            'Role',
             // ... your own models/permission you want to crate
         ]);
 
         $collection->each(function ($item, $key) {
             // create permissions for each collection item
-            Permission::create(['group' => $item, 'name' => 'view ' . $item]);
-            Permission::create(['group' => $item, 'name' => 'view own ' . $item]);
-            Permission::create(['group' => $item, 'name' => 'manage ' . $item]);
-            Permission::create(['group' => $item, 'name' => 'manage own ' . $item]);
-            Permission::create(['group' => $item, 'name' => 'restore ' . $item]);
-            Permission::create(['group' => $item, 'name' => 'forceDelete ' . $item]);
+            Permission::create(['group' => $item, 'name' => 'view' . $item]);
+            Permission::create(['group' => $item, 'name' => 'update' . $item]);
+            Permission::create(['group' => $item, 'name' => 'create' . $item]);
+            Permission::create(['group' => $item, 'name' => 'delete' . $item]);
+            Permission::create(['group' => $item, 'name' => 'destroy' . $item]);
         });
 
         // Create a Super-Admin Role and assign all permissions to it
@@ -237,7 +236,7 @@ class User {
 }
 ```
 
-## Customization
+## Customizations
 
 ```php
 // in app/Providers/NovaServiceProvider.php
@@ -262,6 +261,11 @@ public function tools()
             ])
             ->resolveGuardsUsing(function($request) {
                 return [ 'web' ];
+            })
+            ->resolveModelForGuardUsing(function($request) {
+                /** @var App\Auth\CustomGuard $guard */
+                $guard = auth()->guard();
+                return $guard->getProvider()->getModel();
             })
     ];
 }

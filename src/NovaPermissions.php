@@ -13,6 +13,7 @@ use Sereny\NovaPermissions\Nova\Resource;
 use Sereny\NovaPermissions\Nova\Role;
 use Sereny\NovaPermissions\Policies\PermissionPolicy;
 use Sereny\NovaPermissions\Policies\RolePolicy;
+use Sereny\NovaPermissions\Traits\ModelForGuardResolver;
 
 class NovaPermissions extends Tool
 {
@@ -78,9 +79,9 @@ class NovaPermissions extends Tool
      * @param  \Closure  $callback
      * @return $this
      */
-    public function resolveUserModelUsing($callback)
+    public function resolveModelForGuardUsing($callback)
     {
-        Resource::$resolveUserModelCallback = $callback;
+        ModelForGuardResolver::$resolveModelForGuardCallback = $callback;
         return $this;
     }
 
