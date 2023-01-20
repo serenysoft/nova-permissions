@@ -163,6 +163,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $collection->each(function ($item, $key) {
             // create permissions for each collection item
+            Permission::create(['group' => $item, 'name' => 'viewAny' . $item]);
             Permission::create(['group' => $item, 'name' => 'view' . $item]);
             Permission::create(['group' => $item, 'name' => 'update' . $item]);
             Permission::create(['group' => $item, 'name' => 'create' . $item]);
