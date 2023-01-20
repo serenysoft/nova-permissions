@@ -1,7 +1,7 @@
 Laravel Nova 4 Roles & Permissions Changelog
 ============================================
 
-## v1.2.0
+## v1.2.0 (2023-01-20)
 
 - Added ability to customize role and permission resources
 
