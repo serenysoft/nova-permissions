@@ -62,6 +62,30 @@ class NovaPermissions extends Tool
     }
 
     /**
+     * Set the role resource class name
+     *
+     * @param  class-string<\Laravel\Nova\Resource>  $resourceClass
+     * @return $this
+     */
+    public function roleResource($resourceClass)
+    {
+        $this->roleResource = $resourceClass;
+        return $this;
+    }
+
+     /**
+     * Set the permission resource class name
+     *
+     * @param  class-string<\Laravel\Nova\Resource>  $resourceClass
+     * @return $this
+     */
+    public function permissionResource($resourceClass)
+    {
+        $this->permissionResource = $resourceClass;
+        return $this;
+    }
+
+    /**
      * Set a callback that should be used to define wich guard names will be available
      *
      * @param  \Closure  $callback

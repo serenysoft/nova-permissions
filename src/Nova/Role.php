@@ -1,7 +1,6 @@
 <?php
 namespace Sereny\NovaPermissions\Nova;
 
-use Laravel\Nova\Nova;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
