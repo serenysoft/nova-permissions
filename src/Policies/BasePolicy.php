@@ -114,12 +114,7 @@ class BasePolicy {
      */
     protected function hasPermissionTo($user, $permission)
     {
-        $class = get_class($user);
-
-        if (! method_exists($user, 'isSuperAdmin')) {
-            throw new \Exception("$class must have isSuperAdmin method declared");
-        }
-
-        return $user->isSuperAdmin() || $user->hasPermissionTo($this->buildPermission($permission));
+        return (method_exists($user, 'isSuperAdmin') && $user->isSuperAdmin()) 
+            || $user->hasPermissionTo($this->buildPermission($permission));
     }
 }
