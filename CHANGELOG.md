@@ -1,7 +1,7 @@
 Laravel Nova 4 Roles & Permissions Changelog
 ============================================
 
-## v1.2.1
+## v1.2.1 (2023-01-26)
 
 - The `isSuperAdmin` user method now is optional
 - Disabled permissions global search
