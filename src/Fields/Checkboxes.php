@@ -14,6 +14,24 @@ class Checkboxes extends Field
      */
     public $component = 'permission-checkboxes';
 
+
+    /**
+     * Create a new field.
+     *
+     * @param  string  $name
+     * @param  string|\Closure|callable|object|null  $attribute
+     * @param  (callable(mixed, mixed, ?string):(mixed))|null  $resolveCallback
+     * @return void
+     */
+    public function __construct($name, $attribute = null, callable $resolveCallback = null)
+    {
+        parent::__construct($name, $attribute, $resolveCallback);
+
+        $this->resolveUsing(function($value) {
+            return $value->pluck('name')->toArray();
+        });
+    }
+
     /**
      * Specify the available options
      *

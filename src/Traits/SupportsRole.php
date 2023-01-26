@@ -11,24 +11,6 @@ trait SupportsRole
     use ModelForGuardResolver;
 
     /**
-     * Initialize the trait
-     *
-     * @return void
-     */
-    protected function initializeSupportsRole()
-    {
-        $this->append('prepared_permissions');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPreparedPermissionsAttribute()
-    {
-        return $this->permissions->pluck('name')->toArray();
-    }
-
-    /**
      * A role belongs to some users of the model associated with its guard.
      */
     public function users(): BelongsToMany
