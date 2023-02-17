@@ -1,6 +1,10 @@
 Laravel Nova 4 Roles & Permissions Changelog
 ============================================
 
+## v1.2.2
+
+- Fixed deprecated static trait property
+
 ## v1.2.1 (2023-01-26)
 
 - The `isSuperAdmin` user method now is optional

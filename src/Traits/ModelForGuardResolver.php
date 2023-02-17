@@ -2,17 +2,9 @@
 
 namespace Sereny\NovaPermissions\Traits;
 
-/**
- *
- */
-trait ModelForGuardResolver {
+use Sereny\NovaPermissions\ModelForGuardState;
 
-    /**
-     * The callback that should be used to resolve user model.
-     *
-     * @var \Closure|null
-     */
-    public static $resolveModelForGuardCallback;
+trait ModelForGuardResolver {
 
     /**
      * Determines the guard model class
@@ -21,8 +13,8 @@ trait ModelForGuardResolver {
      */
     public function modelForGuard()
     {
-        return ModelForGuardResolver::$resolveModelForGuardCallback
-            ? call_user_func(ModelForGuardResolver::$resolveModelForGuardCallback)
+        return ModelForGuardState::$resolveModelForGuardCallback
+            ? call_user_func(ModelForGuardState::$resolveModelForGuardCallback)
             : getModelForGuard($this->guard_name);
     }
 }

@@ -105,7 +105,7 @@ class NovaPermissions extends Tool
      */
     public function resolveModelForGuardUsing($callback)
     {
-        ModelForGuardResolver::$resolveModelForGuardCallback = $callback;
+        ModelForGuardState::$resolveModelForGuardCallback = $callback;
         return $this;
     }
 
