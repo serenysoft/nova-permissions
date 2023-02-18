@@ -1,7 +1,8 @@
-Laravel Nova 4 Roles & Permissions Changelog
-============================================
+# Release Notes
 
-## v1.2.2
+## Unreleased
+
+## v1.2.2 (2023-02-18)
 
 - Fixed deprecated static trait property
 
