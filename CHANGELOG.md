@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Menu section now is collapsable
+
 ## v1.2.2 (2023-02-18)
 
 - Fixed deprecated static trait property
