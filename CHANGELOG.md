@@ -1,6 +1,6 @@
 # Release Notes
 
-## Unreleased
+## v1.2.3 (2023-02-28)
 
 - Menu section now is collapsable
 
