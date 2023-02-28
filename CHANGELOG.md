@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v1.2.3 (2023-02-28)
+
+- Added collapsable() for the section
+
 ## v1.2.2 (2023-02-18)
 
 - Fixed deprecated static trait property
