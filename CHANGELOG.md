@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Added collapsable() for the section
+- Menu section now is collapsable
 
 ## v1.2.2 (2023-02-18)
 
