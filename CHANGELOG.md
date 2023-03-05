@@ -4,7 +4,7 @@
 
 ## v1.2.4 (2023-03-05)
 
-- Fixed an issue where permissions field were showing duplicated.
+- Fixed an issue where permissions field were showing duplicated values.
 
 ## v1.2.3 (2023-02-28)
 
