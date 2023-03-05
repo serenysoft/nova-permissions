@@ -118,6 +118,6 @@ class Role extends Resource
         /** @var class-string */
         $permissionClass = config('permission.models.permission');
 
-        return $permissionClass::all();
+        return $permissionClass::all()->unique('name');
     }
 }
