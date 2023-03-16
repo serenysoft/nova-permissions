@@ -7,27 +7,29 @@
   >
     <template #field>
       <div class="w-full">
-        <div v-for="(permissions, group) in field.options" :key="group" class="mb-4">
-          <h1 class="font-normal text-lg mb-3 my-2">
-            <checkbox :checked="isGroupChecked(group)" @click="toggleGroup(group)"/>
-            <label class="w-full ml-1" @click="toggleGroup(group)">
-              {{ __(group) }}
-            </label>
-          </h1>
-          <div class="grid grid-cols-4 gap-4 break-words">
-            <div v-for="(permission, option) in permissions" :key="permission.option">
-              <checkbox
-                :value="permission.option"
-                :checked="isChecked(permission.option)"
-                @input="toggleOption(permission.option)"
-              />
-              <label
-                :for="field.name"
-                v-text="permission.label"
-                @click="toggleOption(permission.option)"
-                class="w-full ml-1"
-              ></label>
-              </div>
+        <div v-for="(permissions, group) in field.options" :key="group" class="mb-2 border">
+          <div class="p-4">
+            <h1 class="font-bold text-base mb-3 my-2">
+              <checkbox :checked="isGroupChecked(group)" @click="toggleGroup(group)"/>
+              <label class="w-full ml-1 cursor-pointer" @click="toggleGroup(group)">
+                {{ __(group) }}
+              </label>
+            </h1>
+            <div class="grid grid-cols-4 gap-4 break-words">
+              <div v-for="(permission, option) in permissions" :key="permission.option">
+                <checkbox
+                  :value="permission.option"
+                  :checked="isChecked(permission.option)"
+                  @input="toggleOption(permission.option)"
+                />
+                <label
+                  :for="field.name"
+                  v-text="permission.label"
+                  @click="toggleOption(permission.option)"
+                  class="w-full ml-1 cursor-pointer"
+                ></label>
+                </div>
+            </div>
           </div>
         </div>
       </div>
