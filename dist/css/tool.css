@@ -1,7 +1,1 @@
-/* Nova Tool CSS */
-.max-col-2 {
-  -moz-column-count: 2;
-  column-count: 2;
-  white-space: nowrap;
-}
-
+.max-col-2{-moz-column-count:2;column-count:2;white-space:nowrap}
