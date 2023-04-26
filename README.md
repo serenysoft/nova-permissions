@@ -158,6 +158,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'Team',
             'User',
             'Role',
+            'Permission'
             // ... your own models/permission you want to crate
         ]);
 
