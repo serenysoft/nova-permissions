@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v1.3.0 (2023-04-27)
+
 - Role resource now uses `permission.models.role` configuration as resource model
 
 ## v1.2.4 (2023-03-05)
