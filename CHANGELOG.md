@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Role resource now uses `permission.models.role` configuration as resource model
+
 ## v1.2.4 (2023-03-05)
 
 - Fixed an issue where permissions field were showing duplicated values.

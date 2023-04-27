@@ -8,7 +8,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
-use Spatie\Permission\Models\Permission as SpatiePermission;
+use Spatie\Permission\Models\Permission as PermissionModel;
 
 /**
  * @property static class-string $model
@@ -35,7 +35,7 @@ class Permission extends Resource
      *
      * @var string
      */
-    public static $model = SpatiePermission::class;
+    public static $model = PermissionModel::class;
 
     /**
      * The columns that should be searched.

@@ -9,6 +9,7 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Events\ServingNova;
 use Laravel\Nova\Nova;
 use Sereny\NovaPermissions\Nova\Permission;
+use Sereny\NovaPermissions\Nova\Role;
 
 class ToolServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,7 @@ class ToolServiceProvider extends ServiceProvider
             $this->routes();
         });
 
+        Role::$model = config('permission.models.role');
         Permission::$model = config('permission.models.permission');
 
         Nova::serving(function (ServingNova $event) {
