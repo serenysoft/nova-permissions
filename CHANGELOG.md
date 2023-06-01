@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## v1.3.1 (2023-06-01)
+
 - Fixed an issue where permission resource was not displayed in custom menu.
 
 ## v1.3.0 (2023-04-27)
