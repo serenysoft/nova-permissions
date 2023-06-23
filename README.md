@@ -12,7 +12,6 @@ We have a Migration, Seed, Policy and Resource ready for a good Authorization Ex
     * [Database Seeding](#database-seeding)
     * [Create a Model Policy](#create-a-model-policy)
     * [Super Admin](#super-admin)
-    * [Scope Resource for User](#scope-resource-for-user)
 3. [Customization](#customization)
 4. [Credits](#credits)
 
