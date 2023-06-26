@@ -26,8 +26,8 @@ class ToolServiceProvider extends ServiceProvider
         ], 'migrations');
 
         $this->publishes([
-            __DIR__ . '/../database/seeds/RolesAndPermissionsSeeder.php.stub' => $this->app->databasePath() . "/seeds/RolesAndPermissionsSeeder.php",
-        ], 'seeds');
+            __DIR__ . '/../database/seeders/RolesAndPermissionsSeeder.php.stub' => $this->app->databasePath() . "/seeders/RolesAndPermissionsSeeder.php",
+        ], 'seeders');
 
         $this->app->booted(function () {
             $this->routes();

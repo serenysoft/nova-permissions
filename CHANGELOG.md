@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fixed issue publishing `seeders`
+
 ## v1.3.1 (2023-06-01)
 
 - Fixed an issue where permission resource was not displayed in custom menu.

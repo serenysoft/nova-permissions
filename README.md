@@ -124,11 +124,11 @@ A new menu item called **Roles & Permissions** will appear in your Nova app afte
 Publish our Seeder with the following command:
 
 ```
-php artisan vendor:publish --provider="Sereny\NovaPermissions\ToolServiceProvider" --tag="seeds"
+php artisan vendor:publish --provider="Sereny\NovaPermissions\ToolServiceProvider" --tag="seeders"
 ```
 
 
-This is just an example on how you could seed your Database with Roles and Permissions. Modify `RolesAndPermissionsSeeder.php` in `database/seeds`. List all your Models you want to have Permissions for in the `$collection` Array and change the email for the Super-Admin:
+This is just an example on how you could seed your Database with Roles and Permissions. Modify `RolesAndPermissionsSeeder.php` in `database/seeders`. List all your Models you want to have Permissions for in the `$collection` Array and change the email for the Super-Admin:
 
 ```php
 <?php
