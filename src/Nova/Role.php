@@ -12,6 +12,8 @@ use Sereny\NovaPermissions\Models\Role as RoleModel;
 
 class Role extends Resource
 {
+    public static $displayInNavigation = false;
+    public static $perPageOptions = [50, 200, 500, 1000];
 
     /**
      * The list of field name that should be hidden
