@@ -1,6 +1,6 @@
 # Release Notes
 
-## Unreleased
+## 1.3.2 (2023-08-20)
 
 - Fixed issue publishing `seeders`
 
