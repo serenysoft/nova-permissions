@@ -1,6 +1,6 @@
 # Release Notes
 
-## 1.4.0 Under development
+## 1.4.0 (2023-11-17)
 
 - Add support for "spatie/laravel-permission" 6.0
 
