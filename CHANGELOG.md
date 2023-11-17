@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.4.0 Under development
+
+- Add support for "spatie/laravel-permission" 6.0
+
 ## 1.3.2 (2023-08-20)
 
 - Fixed issue publishing `seeders`
