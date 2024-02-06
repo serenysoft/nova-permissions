@@ -1,6 +1,6 @@
 # Release Notes
 
-## 1.5.0 Under development
+## 1.5.0 (2024-02-06)
 
 - Fixed an issue where permission and role resources was not displayed in custom menu.
 
