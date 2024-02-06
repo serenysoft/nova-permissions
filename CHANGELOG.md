@@ -1,18 +1,22 @@
 # Release Notes
 
+## 1.5.0 Under development
+
+- Fixed an issue where permission and role resources was not displayed in custom menu.
+
 ## 1.4.0 (2023-11-17)
 
-- Add support for "spatie/laravel-permission" 6.0
+- Add support for "spatie/laravel-permission" 6.0.
 
 ## 1.3.2 (2023-08-20)
 
-- Fixed issue publishing `seeders`
+- Fixed issue publishing `seeders`.
 
 ## v1.3.1 (2023-06-01)
 
 ## v1.3.0 (2023-04-27)
 
-- Role resource now uses `permission.models.role` configuration as resource model
+- Role resource now uses `permission.models.role` configuration as resource model.
 
 ## v1.2.4 (2023-03-05)
 
