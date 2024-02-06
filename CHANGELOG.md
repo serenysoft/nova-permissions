@@ -10,11 +10,9 @@
 
 ## v1.3.1 (2023-06-01)
 
-- Fixed an issue where permission resource was not displayed in custom menu.
-
 ## v1.3.0 (2023-04-27)
 
-- Role resource now uses `permission.models.role` configuration as resource model.
+- Role resource now uses `permission.models.role` configuration as resource model
 
 ## v1.2.4 (2023-03-05)
 

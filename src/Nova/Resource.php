@@ -14,6 +14,13 @@ abstract class Resource extends NovaResource
     use ModelForGuardResolver;
 
     /**
+     * Indicates if the resource should be displayed in the sidebar.
+     *
+     * @var bool
+     */
+    public static $displayInNavigation = false;
+
+    /**
      * The callback that should be used to resolve guards that can be used.
      *
      * @var \Closure|null
