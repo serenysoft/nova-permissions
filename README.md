@@ -276,6 +276,31 @@ public function tools()
     ];
 }
 ```
+### Showing roles and permissions in custom menu
+```php
+class NovaServiceProvider extends NovaApplicationServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        parent::boot();
+
+        Nova::mainMenu(function (Request $request) {
+           return [
+               MenuSection::make(__('RolesPermissions'), [
+                   MenuItem::resource(Role::class)->canSee(fn() => true),
+                   MenuItem::resource(Permission::class)->canSee(fn() => true)
+               ])->icon('shield-check')->collapsable()
+           ];
+        });
+    }
+//...
+```
+
 
 ### Important
 
