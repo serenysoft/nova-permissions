@@ -42,6 +42,13 @@ class NovaPermissions extends Tool
      */
     public $displayPermissions = true;
 
+
+    /**
+     * @var bool
+     */
+    public $menuDisabled = false;
+
+
     /**
      * Perform any tasks that need to happen when the tool is booted.
      *
@@ -146,6 +153,19 @@ class NovaPermissions extends Tool
     }
 
     /**
+     * If the default menu should be available
+     *
+     * @return $this
+     */
+    public function disableMenu()
+    {
+        $this->menuDisabled = true;
+        $this->roleResource::$displayInNavigation = $this->menuDisabled;
+        $this->permissionResource::$displayInNavigation = $this->menuDisabled;
+        return $this;
+    }
+
+    /**
      * Build the menu that renders the navigation links for the tool.
      *
      * @param  \Illuminate\Http\Request $request
@@ -153,9 +173,13 @@ class NovaPermissions extends Tool
      */
     public function menu(Request $request)
     {
+        if ($this->menuDisabled) {
+            return [];
+        }
+
         return MenuSection::make(__('Roles & Permissions'), [
-            $this->makeMenuItem($this->roleResource),
-            $this->makeMenuItem($this->permissionResource, $this->displayPermissions)
+            $this->createMenuItem($this->roleResource),
+            $this->createMenuItem($this->permissionResource)
         ])->icon('shield-check')->collapsable();
     }
 
@@ -164,12 +188,9 @@ class NovaPermissions extends Tool
      * @param  class-string<\Laravel\Nova\Resource>  $resourceClass
      * @return void
      */
-    protected function makeMenuItem($resourceClass, $displayInNavigation = true)
+    protected function createMenuItem($resourceClass)
     {
         return MenuItem::make($resourceClass::label())
-            ->path('/resources/'.$resourceClass::uriKey())
-            ->canSee(function ($request) use ($resourceClass, $displayInNavigation) {
-                return $displayInNavigation && $resourceClass::authorizedToViewAny($request);
-            });
+            ->path('/resources/'.$resourceClass::uriKey());
     }
 }

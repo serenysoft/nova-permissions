@@ -1,12 +1,16 @@
 # Release Notes
 
+## 1.6.0 (2024-02-26)
+
+- Added `disableMenu` to allow handling custom menu.
+
 ## 1.5.0 (2024-02-06)
 
 - Fixed an issue where permission and role resources was not displayed in custom menu.
 
 ## 1.4.0 (2023-11-17)
 
-- Add support for "spatie/laravel-permission" 6.0.
+- Added support for "spatie/laravel-permission" 6.0.
 
 ## 1.3.2 (2023-08-20)
 

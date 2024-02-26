@@ -255,6 +255,7 @@ public function tools()
             ->roleResource(Role::class)
             ->permissionResource(Permission::class)
             ->disablePermissions()
+            ->disableMenu();
             ->hideFieldsFromRole([
                 'id',
                 'guard_name'

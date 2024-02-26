@@ -15,6 +15,12 @@ use Spatie\Permission\Models\Permission as PermissionModel;
  */
 class Permission extends Resource
 {
+    /**
+     * Indicates if the resource should be displayed in the sidebar.
+     *
+     * @var bool
+     */
+    public static $displayInNavigation = false;
 
     /**
      * The list of field name that should be hidden
