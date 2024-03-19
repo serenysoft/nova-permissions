@@ -1,6 +1,6 @@
 # Release Notes
 
-## 1.6.0 (2024-02-26)
+## 1.6.0 (2024-03-19)
 
 - Added `disableMenu` to allow handling custom menu.
 
