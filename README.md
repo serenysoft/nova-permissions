@@ -6,15 +6,14 @@ We have a Migration, Seed, Policy and Resource ready for a good Authorization Ex
 
 1. [Installation](#Installation)
 2. [Permissions with Groups](#permissions-with-groups)
-    * [Index view](#index-view)
-    * [Detail View](#detail-view)
-    * [Edit View](#edit-view)
-    * [Database Seeding](#database-seeding)
-    * [Create a Model Policy](#create-a-model-policy)
-    * [Super Admin](#super-admin)
+   - [Index view](#index-view)
+   - [Detail View](#detail-view)
+   - [Edit View](#edit-view)
+   - [Database Seeding](#database-seeding)
+   - [Create a Model Policy](#create-a-model-policy)
+   - [Super Admin](#super-admin)
 3. [Customization](#customization)
 4. [Credits](#credits)
-
 
 ## Installation
 
@@ -118,7 +117,6 @@ A new menu item called **Roles & Permissions** will appear in your Nova app afte
 
 ![image](/.github/images/role-edit.png)
 
-
 ### Database Seeding
 
 Publish our Seeder with the following command:
@@ -126,7 +124,6 @@ Publish our Seeder with the following command:
 ```
 php artisan vendor:publish --provider="Sereny\NovaPermissions\ToolServiceProvider" --tag="seeders"
 ```
-
 
 This is just an example on how you could seed your Database with Roles and Permissions. Modify `RolesAndPermissionsSeeder.php` in `database/seeders`. List all your Models you want to have Permissions for in the `$collection` Array and change the email for the Super-Admin:
 
@@ -176,7 +173,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $role->givePermissionTo(Permission::all());
 
         // Give User Super-Admin Role
-        $user = App\User::whereEmail('your@email.com')->first(); // enter your email here
+        $user = \App\Models\User::where('email', 'your@email.com')->first(); // enter your email here
         $user->assignRole('super-admin');
     }
 }
@@ -209,6 +206,7 @@ class ContactPolicy extends BasePolicy
     public $key = 'contact';
 }
 ```
+
 It should now work as exptected. Just create a Role, modify its Permissions and the Policy should take care of the rest.
 
 > **Note**: Don't forget to add your Policy to your `$policies` in `App\Providers\AuthServiceProvider`.
@@ -332,9 +330,6 @@ class Role extends BaseRole
 }
 
 ```
-
-
-
 
 ## Credits
 
