@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.6.1 Under development
+
+- Add namespace to seeders
+
 ## 1.6.0 (2024-03-19)
 
 - Added `disableMenu` to allow handling custom menu.
