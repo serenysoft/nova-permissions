@@ -2,7 +2,8 @@
 
 ## 1.6.1 Under development
 
-- Add namespace to seeders
+- Add namespace to seeders.
+- Fix issue where permission menu item did not respect `disablePermissions`.
 
 ## 1.6.0 (2024-03-19)
 
