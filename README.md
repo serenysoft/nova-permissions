@@ -331,17 +331,6 @@ class Role extends BaseRole
 
 ```
 
-## Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
 ## Credits
 
 This Package is inspired by [eminiarts/nova-permissions](https://github.com/eminiarts/nova-permissions).
