@@ -1,5 +1,9 @@
 # Laravel Nova 4 Roles & Permissions
 
+[![Latest Stable Version](https://poser.pugx.org/sereny/nova-permissions/v/stable.png)](https://packagist.org/packages/sereny/nova-permissions)
+[![Total Downloads](https://poser.pugx.org/sereny/nova-permissions/downloads.png)](https://packagist.org/packages/sereny/nova-permissions)
+
+
 A Laravel Nova Tool that allows you to group your Permissions and attach it to Users. It uses Spatie's laravel-permission.
 
 We have a Migration, Seed, Policy and Resource ready for a good Authorization Experience.
@@ -286,47 +290,15 @@ To customize the `Role` model you need to use `Sereny\NovaPermissions\Traits\Sup
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Support\Str;
 use Sereny\NovaPermissions\Traits\SupportsRole;
 use Spatie\Permission\Models\Role as BaseRole;
 
 class Role extends BaseRole
 {
-    use SupportsRole; // REQUIRED TRAIT
-
-     /**
-     * The "booted" method of the model.
-     *
-     * @return void
-     */
-    protected static function booted(): void
-    {
-        static::saving(function (Role $role) {
-            if ($role->id === null) {
-                $role->id = Str::uuid()->toString();
-            }
-        });
-    }
-
-    /**
-     * Force key type as string
-     *
-     * @return string
-     */
-    public function getKeyType()
-    {
-        return 'string';
-    }
-
-    /**
-     * Disable incrementing
-     *
-     * @return bool
-     */
-    public function getIncrementing()
-    {
-        return false;
-    }
+    use HasUuids,
+        SupportsRole; // REQUIRED TRAIT
 }
 
 ```
