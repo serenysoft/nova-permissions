@@ -91,7 +91,7 @@ public function fields(Request $request)
 }
 ```
 
-Add the Spatie\Permission\Traits\HasRoles trait to your User model(s):
+Add the `Spatie\Permission\Traits\HasRoles` trait to your User model(s):
 
 ```php
 use Illuminate\Foundation\Auth\User as Authenticatable;
