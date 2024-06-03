@@ -75,7 +75,7 @@ public function tools()
 
 ```
 
-Finally, add `MorphToMany` fields to you `app/Nova/User` resource:
+Finally, add `MorphToMany` fields to your `app/Nova/User` resource:
 
 ```php
 // ...
