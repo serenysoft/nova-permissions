@@ -93,6 +93,30 @@ class NovaPermissions extends Tool
     }
 
     /**
+     * Set the role policy class name
+     *
+     * @param  class-string $rolePolicy
+     * @return $this
+     */
+    public function rolePolicy($rolePolicy)
+    {
+        $this->rolePolicy = $rolePolicy;
+        return $this;
+    }
+
+     /**
+     * Set the permission policy class name
+     *
+     * @param  class-string $permissionPolicy
+     * @return $this
+     */
+    public function permissionPolicy($permissionPolicy)
+    {
+        $this->permissionPolicy = $permissionPolicy;
+        return $this;
+    }
+
+    /**
      * Set a callback that should be used to define wich guard names will be available
      *
      * @param  \Closure  $callback
