@@ -246,6 +246,8 @@ class User {
 
 use App\Nova\Permission;
 use App\Nova\Role;
+use App\Policies\PermissionPolicy;
+use App\Policies\RolePolicy;
 
 // ...
 
@@ -256,6 +258,8 @@ public function tools()
         \Sereny\NovaPermissions\NovaPermissions::make()
             ->roleResource(Role::class)
             ->permissionResource(Permission::class)
+            ->rolePolicy(RolePolicy::class)
+            ->permissionPolicy(PermissionPolicy::class)
             ->disablePermissions()
             ->disableMenu();
             ->hideFieldsFromRole([
