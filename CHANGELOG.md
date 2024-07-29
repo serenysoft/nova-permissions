@@ -3,7 +3,6 @@
 ## 1.6.2 (2024-07-29)
 
 - Add setter methods for Role and Permission policies.
-- Add eager loading of permissions relationship on the Role resource.
 
 ## 1.6.1 (2024-05-06)
 
