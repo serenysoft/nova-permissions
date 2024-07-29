@@ -50,6 +50,15 @@ class Role extends Resource
     public static $title = 'name';
 
     /**
+     * The relationships that should be eager loaded when performing an index query.
+     *
+     * @var array
+     */
+    public static $with = [
+        'permissions',
+    ];
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @param  \Illuminate\Http\Request $request
