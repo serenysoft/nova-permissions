@@ -115,15 +115,23 @@ class Role extends Resource
     }
 
     /**
-     * Load all permissions
+     * Load all permissions and cache for 1 minute.
+     * Enough to avoid N+1 at the Role index page,
+     * and not long enough to have them stalled.
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
     protected function loadPermissions()
     {
-        /** @var class-string */
-        $permissionClass = config('permission.models.permission');
+        return cache()->remember(
+            'sereny-all-permissions',
+            now()->addMinute(),
+            function () {
+                /** @var class-string */
+                $permissionClass = config('permission.models.permission');
 
-        return $permissionClass::all()->unique('name');
+                return $permissionClass::all()->unique('name');
+            }
+        );
     }
 }
