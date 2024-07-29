@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.6.2 (2024-07-29)
+
+- Add setter methods for Role and Permission policies.
+
 ## 1.6.1 (2024-05-06)
 
 - Add namespace to seeders.
