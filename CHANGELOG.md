@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.6.3 (2024-07-29)
+
+- Add cache for `loadPermissions` query on Role resource, improving index performance.
+
 ## 1.6.2 (2024-07-29)
 
 - Add setter methods for Role and Permission policies.
