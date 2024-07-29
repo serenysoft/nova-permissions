@@ -13,6 +13,13 @@ use Sereny\NovaPermissions\Models\Role as RoleModel;
 class Role extends Resource
 {
     /**
+     * A cache for all permissions. Useful for the index query.
+     *
+     * @var bool
+     */
+    private static $allPermissions = [];
+
+    /**
      * Indicates if the resource should be displayed in the sidebar.
      *
      * @var bool
@@ -56,6 +63,7 @@ class Role extends Resource
      */
     public static $with = [
         'permissions',
+        'users',
     ];
 
     /**
@@ -101,7 +109,7 @@ class Role extends Resource
                 ->toArray()),
 
             Text::make(__('Users'), function () {
-                return $this->users()->count();
+                return $this->users->count();
             })->exceptOnForms(),
 
             MorphToMany::make($userResource::label(), 'users', $userResource)
@@ -133,6 +141,10 @@ class Role extends Resource
         /** @var class-string */
         $permissionClass = config('permission.models.permission');
 
-        return $permissionClass::all()->unique('name');
+        if (!static::$allPermissions) {
+            static::$allPermissions = $permissionClass::all()->unique('name');
+        }
+
+        return static::$allPermissions;
     }
 }
