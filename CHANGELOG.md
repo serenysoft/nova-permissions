@@ -4,6 +4,7 @@
 
 - Add cache for `loadPermissions` query on Role resource, improving index performance.
 - Add eager loading of permissions relationship on the Role resource index.
+- Add eager loading of the user count on the Role resource index.
 - Fixed an issue when listing the Roles when Preventing Lazy Loading is active.
 
 ## 1.6.2 (2024-07-29)
