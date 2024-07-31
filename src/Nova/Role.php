@@ -15,8 +15,6 @@ use Sereny\NovaPermissions\Models\Role as RoleModel;
 
 class Role extends Resource
 {
-    public const CACHE_KEY_ALL_PERMISSIONS = 'sereny-all-permissions';
-
     /**
      * Indicates if the resource should be displayed in the sidebar.
      *
@@ -105,15 +103,11 @@ class Role extends Resource
                     ->toArray()),
 
             Text::make(__('Users'), function () {
-                /**
-                 * We eager load count for the users relationship
-                 * in the index query. @see self::indexQuery()
-                 */
-                if (isset($this->users_count)) {
-                    return $this->users_count;
-                }
+                $expirationTime = config('permission.cache.nova_expiration_time', now()->addMinute());
 
-                return $this->users()->count();
+                return cache()->remember('sereny-nova-permissions-user-count', $expirationTime, function () {
+                    return $this->users()->count();
+                });
             })->exceptOnForms(),
 
             MorphToMany::make($userResource::label(), 'users', $userResource)
@@ -129,19 +123,9 @@ class Role extends Resource
         return __('Roles');
     }
 
-
     public static function singularLabel()
     {
         return __('Role');
-    }
-
-    /**
-     * Let's eager load the user count within the "index" query.
-     */
-    public static function indexQuery(NovaRequest $request, $query)
-    {
-        /** @var Builder|PermissionModel $query */
-        return $query->withCount('users');
     }
 
     /**
@@ -153,17 +137,13 @@ class Role extends Resource
      */
     protected function loadPermissions()
     {
-        $ttl = config('permission.cache.nova_expiration_time', now()->addMinute());
+        $expirationTime = config('permission.cache.nova_expiration_time', now()->addMinute());
 
-        return cache()->remember(
-            self::CACHE_KEY_ALL_PERMISSIONS,
-            $ttl,
-            function () {
-                /** @var class-string */
-                $permissionClass = config('permission.models.permission');
+        return cache()->remember('sereny-nova-permissions', $expirationTime, function () {
+            /** @var class-string */
+            $permissionClass = config('permission.models.permission');
 
-                return $permissionClass::all()->unique('name');
-            }
-        );
+            return $permissionClass::all()->unique('name');
+        });
     }
 }
