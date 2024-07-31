@@ -9,7 +9,6 @@ use Illuminate\Validation\Rule;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\MorphToMany;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\TrashedStatus;
 use Sereny\NovaPermissions\Fields\Checkboxes;
 use Sereny\NovaPermissions\Models\Role as RoleModel;
 
