@@ -50,6 +50,15 @@ class Role extends Resource
     public static $title = 'name';
 
     /**
+     * Indicates if the resource should be displayed in the sidebar.
+     *
+     */
+    public static $with = [
+        'permissions',
+        'users',
+    ];
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @param  \Illuminate\Http\Request $request
@@ -88,11 +97,17 @@ class Role extends Resource
                         'label'  => __($permission->name),
                     ];
                 })
-                ->groupBy('group')
-                ->toArray()),
+                    ->groupBy('group')
+                    ->toArray()),
 
             Text::make(__('Users'), function () {
-                return $this->users()->count();
+                // For the detail page, we have no eager load $with, so, in order
+                // to avoid an error when lazy load is disabled, we load it here.
+                if (!$this->relationLoaded('users')) {
+                    $this->load('users');
+                }
+
+                return $this->users->count();
             })->exceptOnForms(),
 
             MorphToMany::make($userResource::label(), 'users', $userResource)
