@@ -102,11 +102,11 @@ class Role extends Resource
                     ->toArray()),
 
             Text::make(__('Users'), function () {
-                $expirationTime = config('permission.cache.nova_expiration_time', now()->addMinute());
-
-                return cache()->remember('sereny-nova-permissions-user-count', $expirationTime, function () {
-                    return $this->users()->count();
-                });
+                /**
+                 * We eager load count for the users relationship in the index query.
+                 * @see self::indexQuery()
+                 */
+                return isset($this->users_count) ? $this->users_count : $this->users()->count();
             })->exceptOnForms(),
 
             MorphToMany::make($userResource::label(), 'users', $userResource)
