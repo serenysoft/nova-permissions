@@ -128,6 +128,15 @@ class Role extends Resource
     }
 
     /**
+     * Let's eager load the user count within the "index" query.
+     */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        /** @var Builder|PermissionModel $query */
+        return $query->withCount('users');
+    }
+
+    /**
      * Load all permissions and cache for 1 minute.
      * Enough to avoid N+1 at the Role index page,
      * and not long enough to have them stalled.
