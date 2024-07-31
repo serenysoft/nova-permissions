@@ -133,7 +133,7 @@ class Role extends Resource
     public static function indexQuery(NovaRequest $request, $query)
     {
         /** @var Builder|PermissionModel $query */
-        return $query->withCount('users');
+        return parent::indexQuery($request, $query)->withCount('users');
     }
 
     /**
