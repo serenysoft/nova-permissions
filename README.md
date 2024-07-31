@@ -1,8 +1,7 @@
 # Laravel Nova 4 Roles & Permissions
 
-[![Latest Stable Version](https://poser.pugx.org/sereny/nova-permissions/v/stable.png)](https://packagist.org/packages/sereny/nova-permissions)
-[![Total Downloads](https://poser.pugx.org/sereny/nova-permissions/downloads.png)](https://packagist.org/packages/sereny/nova-permissions)
-
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/sereny/nova-permissions?style=flat-square)](https://packagist.org/packages/sereny/nova-permissions)
+[![Total Downloads](https://poser.pugx.org/sereny/nova-permissions/downloads?format=flat-square)](https://packagist.org/packages/sereny/nova-permissions)
 
 A Laravel Nova Tool that allows you to group your Permissions and attach it to Users. It uses Spatie's laravel-permission.
 
