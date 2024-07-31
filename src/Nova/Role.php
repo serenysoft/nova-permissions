@@ -12,6 +12,8 @@ use Sereny\NovaPermissions\Models\Role as RoleModel;
 
 class Role extends Resource
 {
+    public const CACHE_KEY_ALL_PERMISSIONS = 'sereny-all-permissions';
+    
     /**
      * Indicates if the resource should be displayed in the sidebar.
      *
@@ -138,9 +140,11 @@ class Role extends Resource
      */
     protected function loadPermissions()
     {
+        $ttl = config('permission.caching.all_permissions_ttl', now()->addMinute());
+
         return cache()->remember(
-            'sereny-all-permissions',
-            now()->addMinute(),
+            self::CACHE_KEY_ALL_PERMISSIONS,
+            $ttl,
             function () {
                 /** @var class-string */
                 $permissionClass = config('permission.models.permission');
