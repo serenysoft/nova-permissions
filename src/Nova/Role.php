@@ -153,7 +153,7 @@ class Role extends Resource
      */
     protected function loadPermissions()
     {
-        $ttl = config('permission.caching.all_permissions_ttl', now()->addMinute());
+        $ttl = config('permission.cache.nova_expiration_time', now()->addMinute());
 
         return cache()->remember(
             self::CACHE_KEY_ALL_PERMISSIONS,
