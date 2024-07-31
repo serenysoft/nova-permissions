@@ -1,6 +1,6 @@
 # Release Notes
 
-## 1.6.2 Under development
+## 1.6.2 (2024-07-31)
 
 - Add setter methods for Role and Permission policies.
 - Add cache for `permissions` and `users count` query on Role resource, improving index performance.
