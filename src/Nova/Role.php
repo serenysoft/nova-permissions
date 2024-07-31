@@ -1,19 +1,22 @@
 <?php
 namespace Sereny\NovaPermissions\Nova;
 
+use Illuminate\Database\Query\Builder;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Illuminate\Validation\Rule;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\MorphToMany;
+use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\TrashedStatus;
 use Sereny\NovaPermissions\Fields\Checkboxes;
 use Sereny\NovaPermissions\Models\Role as RoleModel;
 
 class Role extends Resource
 {
     public const CACHE_KEY_ALL_PERMISSIONS = 'sereny-all-permissions';
-    
+
     /**
      * Indicates if the resource should be displayed in the sidebar.
      *
@@ -57,7 +60,6 @@ class Role extends Resource
      */
     public static $with = [
         'permissions',
-        'users',
     ];
 
     /**
@@ -103,13 +105,15 @@ class Role extends Resource
                     ->toArray()),
 
             Text::make(__('Users'), function () {
-                // For the detail page, we have no eager load $with, so, in order
-                // to avoid an error when lazy load is disabled, we load it here.
-                if (!$this->relationLoaded('users')) {
-                    $this->load('users');
+                /**
+                 * We eager load count for the users relationship
+                 * in the index query. @see self::indexQuery()
+                 */
+                if (isset($this->users_count)) {
+                    return $this->users_count;
                 }
 
-                return $this->users->count();
+                return $this->users()->count();
             })->exceptOnForms(),
 
             MorphToMany::make($userResource::label(), 'users', $userResource)
@@ -129,6 +133,15 @@ class Role extends Resource
     public static function singularLabel()
     {
         return __('Role');
+    }
+
+    /**
+     * Let's eager load the user count within the "index" query.
+     */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        /** @var Builder|PermissionModel $query */
+        return $query->withCount('users');
     }
 
     /**
