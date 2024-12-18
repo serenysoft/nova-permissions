@@ -1,4 +1,4 @@
-# Laravel Nova 4 Roles & Permissions
+# Laravel Nova 5 Roles & Permissions
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/sereny/nova-permissions?style=flat-square)](https://packagist.org/packages/sereny/nova-permissions)
 [![Total Downloads](https://poser.pugx.org/sereny/nova-permissions/downloads?format=flat-square)](https://packagist.org/packages/sereny/nova-permissions)
