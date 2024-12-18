@@ -1,6 +1,6 @@
 {
     "name": "sereny/nova-permissions",
-    "description": "Laravel Nova 4 Grouped Permissions",
+    "description": "Laravel Nova 5 Grouped Permissions",
     "keywords": [ "laravel", "nova", "permission", "role" ],
     "license": "MIT",
     "prefer-stable": true,
@@ -22,8 +22,8 @@
       }
     ],
     "require": {
-        "php": "^7.3|^8.0",
-        "laravel/nova": "^4.0",
+        "php": "^8.1",
+        "laravel/nova": "^5.0",
         "spatie/laravel-permission": "^6.0"
     },
     "autoload": {
