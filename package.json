@@ -12,14 +12,13 @@
   },
   "devDependencies": {
     "@inertiajs/inertia": "^0.11.1",
-    "@vue/babel-plugin-jsx": "^1.1.1",
-    "@vue/compiler-sfc": "^3.2.22",
-    "axios": "^1.2.1",
-    "form-backend-validation": "^2.4.0",
-    "laravel-mix": "^6.0.41",
+    "@vue/babel-plugin-jsx": "^1.2.5",
+    "@vue/compiler-sfc": "^3.5.13",
+    "axios": "^1.7.9",
+    "laravel-mix": "^6.0.49",
     "lodash": "^4.17.21",
-    "postcss": "^8.3.11",
-    "vue-loader": "^16.8.3",
+    "postcss": "^8.4.49",
+    "vue-loader": "^17.4.2",
     "vuex": "^4.1.0"
   }
 }
