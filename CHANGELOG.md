@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.7.0 Under development
+
+- Add support for Laravel Nova 5
+- Drop support for Laravel Nova 4 and lower
+
 ## 1.6.2 (2024-07-31)
 
 - Add setter methods for Role and Permission policies.

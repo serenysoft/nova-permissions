@@ -1,6 +1,6 @@
 {
     "name": "sereny/nova-permissions",
-    "description": "Laravel Nova 5 Grouped Permissions",
+    "description": "Laravel Nova - Roles & Permissions",
     "keywords": [ "laravel", "nova", "permission", "role" ],
     "license": "MIT",
     "prefer-stable": true,
