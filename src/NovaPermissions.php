@@ -64,8 +64,7 @@ class NovaPermissions extends Tool
         Gate::policy(config('permission.models.permission'), $this->permissionPolicy);
         Gate::policy(config('permission.models.role'), $this->rolePolicy);
 
-        Nova::script('nova-permissions', __DIR__.'/../dist/js/tool.js');
-        Nova::style('nova-permissions', __DIR__.'/../dist/css/tool.css');
+        Nova::mix('nova-permissions', __DIR__.'/../dist/mix-manifest.json');
     }
 
     /**

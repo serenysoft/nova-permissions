@@ -1,0 +1,33 @@
+laravel: '@testbench'
+
+providers:
+  - Laravel\Nova\NovaServiceProvider
+  - Laravel\Nova\NovaCoreServiceProvider
+  - Workbench\App\Providers\NovaServiceProvider
+  - Spatie\Permission\PermissionServiceProvider
+  - Sereny\NovaPermissions\ToolServiceProvider
+  # - Workbench\App\Providers\WorkbenchServiceProvider
+
+migrations: true
+
+seeders:
+  - Workbench\Database\Seeders\DatabaseSeeder
+  - Workbench\Database\Seeders\RolesAndPermissionsSeeder
+
+workbench:
+  start: /nova
+  build:
+    - package:discover
+    - asset-publish
+    - create-sqlite-db
+    - db:wipe
+    - migrate:refresh
+  assets:
+    - migrations
+    - nova-assets
+  sync: []
+
+purge:
+  directories:
+    - lang/*
+    - public/vendor/*

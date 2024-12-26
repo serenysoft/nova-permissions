@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { flatMap } from 'lodash';
+import flatMap from 'lodash/flatMap';
 
 export default {
   props: [
