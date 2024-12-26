@@ -7,18 +7,11 @@
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "mix watch --hot",
     "prod": "npm run production",
-    "production": "mix --production",
-    "nova:install": "npm --prefix='../../vendor/laravel/nova' ci"
+    "production": "mix --production"
   },
   "devDependencies": {
-    "@inertiajs/inertia": "^0.11.1",
     "@vue/babel-plugin-jsx": "^1.2.5",
     "@vue/compiler-sfc": "^3.5.13",
-    "axios": "^1.7.9",
-    "laravel-mix": "^6.0.49",
-    "lodash": "^4.17.21",
-    "postcss": "^8.4.49",
-    "vue-loader": "^17.4.2",
-    "vuex": "^4.1.0"
+    "laravel-nova-devtool": "file:vendor/laravel/nova-devtool"
   }
 }

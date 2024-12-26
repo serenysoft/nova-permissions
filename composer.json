@@ -1,7 +1,12 @@
 {
     "name": "sereny/nova-permissions",
     "description": "Laravel Nova - Roles & Permissions",
-    "keywords": [ "laravel", "nova", "permission", "role" ],
+    "keywords": [
+        "laravel",
+        "nova",
+        "permission",
+        "role"
+    ],
     "license": "MIT",
     "prefer-stable": true,
     "support": {
@@ -16,15 +21,18 @@
         }
     ],
     "repositories": [
-      {
-          "type": "composer",
-          "url": "https://nova.laravel.com"
-      }
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
     ],
     "require": {
         "php": "^8.1",
         "laravel/nova": "^5.0",
         "spatie/laravel-permission": "^6.0"
+    },
+    "require-dev": {
+        "laravel/nova-devtool": "^1.2"
     },
     "autoload": {
         "psr-4": {
@@ -43,5 +51,26 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve --ansi"
+        ]
     }
 }
