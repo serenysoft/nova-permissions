@@ -10,8 +10,11 @@
     "production": "mix --production"
   },
   "devDependencies": {
-    "@vue/babel-plugin-jsx": "^1.2.5",
-    "@vue/compiler-sfc": "^3.5.13",
-    "laravel-nova-devtool": "file:vendor/laravel/nova-devtool"
+    "laravel-nova-devtool": "file:vendor/laravel/nova-devtool",
+    "vue-loader": "^16.8.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "vue": "^3.5.13"
   }
 }

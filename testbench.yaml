@@ -10,6 +10,7 @@ migrations: true
 
 seeders:
   - Workbench\Database\Seeders\DatabaseSeeder
+  - Workbench\Database\Seeders\RolesAndPermissionsSeeder
 
 workbench:
   start: /nova
@@ -20,6 +21,7 @@ workbench:
     - db:wipe
     - migrate:refresh
   assets:
+    - migrations
     - nova-assets
   sync: []
 

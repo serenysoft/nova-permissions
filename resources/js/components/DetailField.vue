@@ -7,13 +7,11 @@
             {{ __(group) }}
           </h1>
           <div class="grid grid-cols-4 gap-4">
-            <div v-for="(permission, option) in permissions" :key="option">
+            <div v-for="(permission, option) in permissions" :key="option" class="flex items-center">
               <Icon
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                :type="hasPermission(permission.option) ? 'check-circle' : 'x-circle'"
+                :name="hasPermission(permission.option) ? 'check-circle' : 'x-circle'"
                 :class="hasPermission(permission.option) ? 'text-green-500' : 'text-red-500'"
+                class="inline-block"
               />
               <span class="ml-1">{{ permission.label }}</span>
             </div>
@@ -25,7 +23,10 @@
 </template>
 
 <script>
+import { Icon } from 'laravel-nova-ui';
+
 export default {
+  components: { Icon },
   props: [
     'resource',
     'resourceName',
