@@ -1,12 +1,7 @@
 {
     "name": "sereny/nova-permissions",
     "description": "Laravel Nova - Roles & Permissions",
-    "keywords": [
-        "laravel",
-        "nova",
-        "permission",
-        "role"
-    ],
+    "keywords": [ "laravel", "nova", "permission", "role" ],
     "license": "MIT",
     "prefer-stable": true,
     "support": {
@@ -39,6 +34,13 @@
             "Sereny\\NovaPermissions\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
+        }
+    },
     "extra": {
         "laravel": {
             "providers": [
@@ -51,13 +53,6 @@
     },
     "config": {
         "sort-packages": true
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Workbench\\App\\": "workbench/app/",
-            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
-            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
-        }
     },
     "scripts": {
         "post-autoload-dump": [
