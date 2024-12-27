@@ -1,6 +1,6 @@
 # Release Notes
 
-## 1.7.0 Under development
+## 1.7.0 (2024-12-27)
 
 - Add support for Laravel Nova 5
 - Drop support for Laravel Nova 4 and lower
