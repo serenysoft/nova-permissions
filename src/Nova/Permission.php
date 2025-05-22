@@ -83,7 +83,10 @@ class Permission extends Resource
                 ->updateRules('unique:' . config('permission.table_names.permissions') . ',name,{{resourceId}}'),
 
             Text::make(__('Group'), 'group')
-                ->rules(['required', 'string', 'max:255']),
+                ->rules(['required', 'string', 'max:255'])
+                ->canSee(function ($request) {
+                    return $this->fieldAvailable('group');
+                }),
 
             Select::make(__('Guard Name'), 'guard_name')
                 ->options($guardOptions->toArray())
