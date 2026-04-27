@@ -6,28 +6,72 @@
     :full-width-content="fullWidthContent"
   >
     <template #field>
-      <div class="w-full">
-        <div v-for="(permissions, group) in field.options" :key="group" class="mb-4">
-          <h1 class="font-normal text-lg mb-3 my-2">
-            <checkbox :checked="isGroupChecked(group)" @click="toggleGroup(group)"/>
-            <label class="w-full ml-1" @click="toggleGroup(group)">
+      <div class="w-full space-y-6">
+        <!-- Search Input -->
+        <div class="relative">
+          <input
+            v-model="searchQuery"
+            type="text"
+            :placeholder="__('Search permissions...')"
+            class="w-full py-2 pl-10 pr-4 text-sm text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+          />
+          <div class="absolute inset-y-0 search-icon-position flex items-center pointer-events-none">
+            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+        </div>
+        <div v-for="(permissions, group) in filteredOptions" :key="group"
+             v-show="permissions.length > 0"
+             class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+          <!-- Group Header with Toggle -->
+          <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-200 dark:border-gray-700">
+            <h2 class="text-base font-medium text-gray-900 dark:text-gray-100">
               {{ __(group) }}
-            </label>
-          </h1>
-          <div class="grid grid-cols-4 gap-4 break-words">
-            <div v-for="(permission, option) in permissions" :key="permission.option">
-              <checkbox
-                :value="permission.option"
-                :checked="isChecked(permission.option)"
-                @input="toggleOption(permission.option)"
+            </h2>
+            <button
+              type="button"
+              @click="toggleGroup(group)"
+              class="relative inline-flex h-5 w-9 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+              :style="{ backgroundColor: isGroupChecked(group) ? 'rgb(var(--colors-primary-500))' : '' }"
+              :class="{ 'bg-gray-200 dark:bg-gray-600': !isGroupChecked(group) }"
+              :aria-pressed="isGroupChecked(group)"
+              aria-label="Toggle all permissions in group"
+            >
+              <span
+                class="pointer-events-none inline-block h-4 w-4 rounded-full bg-white shadow ring-0 transition-all duration-200 ease-in-out"
+                :style="{ transform: isGroupChecked(group) ? 'translateX(1rem)' : 'translateX(0)' }"
               />
+            </button>
+          </div>
+
+          <!-- Individual Permissions -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            <div v-for="permission in permissions" :key="permission.option"
+                 class="flex items-center justify-between p-3 bg-white dark:bg-gray-700 rounded-md shadow-sm">
               <label
-                :for="field.name"
-                v-text="permission.label"
+                :for="`permission-${permission.option}`"
+                class="text-sm text-gray-700 dark:text-gray-300 cursor-pointer flex-1 mr-3"
+                @click.prevent="toggleOption(permission.option)"
+              >
+                {{ permission.label }}
+              </label>
+              <button
+                type="button"
+                :id="`permission-${permission.option}`"
                 @click="toggleOption(permission.option)"
-                class="w-full ml-1"
-              ></label>
-              </div>
+                class="relative inline-flex h-5 w-9 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1"
+                :style="{ backgroundColor: isChecked(permission.option) ? 'rgb(var(--colors-primary-500))' : '' }"
+                :class="{ 'bg-gray-200 dark:bg-gray-600': !isChecked(permission.option) }"
+                :aria-pressed="isChecked(permission.option)"
+                :aria-label="`Toggle ${permission.label} permission`"
+              >
+                <span
+                  class="pointer-events-none inline-block h-4 w-4 rounded-full bg-white shadow ring-0 transition-all duration-200 ease-in-out"
+                  :style="{ transform: isChecked(permission.option) ? 'translateX(1rem)' : 'translateX(0)' }"
+                />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -37,6 +81,7 @@
 
 <script>
 import { FormField, HandlesValidationErrors } from 'laravel-nova';
+import Fuse from 'fuse.js';
 
 export default {
   mixins: [
@@ -48,22 +93,79 @@ export default {
     'resourceId',
     'field'
   ],
-  data: {
-    checkedGroups: [],
+  data() {
+    return {
+      searchQuery: '',
+      fuse: null
+    }
+  },
+  computed: {
+    filteredOptions() {
+      if (!this.searchQuery) {
+        return this.field.options;
+      }
+
+      const filtered = {};
+      const searchResults = this.fuse.search(this.searchQuery);
+      const matchedOptions = new Set(searchResults.map(result => result.item.option));
+
+      // Rebuild the grouped structure with only matched permissions
+      Object.entries(this.field.options).forEach(([group, permissions]) => {
+        const filteredPermissions = permissions.filter(permission => 
+          matchedOptions.has(permission.option)
+        );
+        
+        if (filteredPermissions.length > 0) {
+          filtered[group] = filteredPermissions;
+        }
+      });
+
+      return filtered;
+    }
+  },
+  mounted() {
+    this.initializeFuse();
   },
   methods: {
-    avaiableOptions(group) {
-      return this.field.options[group];
+    initializeFuse() {
+      // Flatten all permissions for Fuse.js
+      const allPermissions = [];
+      Object.entries(this.field.options).forEach(([group, permissions]) => {
+        permissions.forEach(permission => {
+          allPermissions.push({
+            ...permission,
+            group: group
+          });
+        });
+      });
+
+      // Configure Fuse.js for fuzzy searching
+      const fuseOptions = {
+        keys: [
+          { name: 'label', weight: 0.7 },
+          { name: 'option', weight: 0.2 },
+          { name: 'group', weight: 0.1 }
+        ],
+        threshold: 0.3,
+        includeScore: true,
+        shouldSort: true
+      };
+
+      this.fuse = new Fuse(allPermissions, fuseOptions);
+    },
+
+    availableOptions(group) {
+      return this.filteredOptions[group] || [];
     },
 
     checkAll(group) {
-      this.avaiableOptions(group).forEach(
+      this.availableOptions(group).forEach(
         (permission) => this.check(permission.option)
       );
     },
 
     uncheckAll(group) {
-      this.avaiableOptions(group).forEach(
+      this.availableOptions(group).forEach(
         (permission) => this.uncheck(permission.option)
       );
     },
@@ -73,7 +175,13 @@ export default {
     },
 
     isGroupChecked(group) {
-      return this.checkedGroups.includes(group);
+      const permissions = this.availableOptions(group);
+
+      if (!permissions || permissions.length === 0) {
+        return false;
+      }
+
+      return permissions.every(permission => this.isChecked(permission.option));
     },
 
     check(option) {
@@ -89,17 +197,10 @@ export default {
     },
 
     toggleGroup(group) {
-      const index = this.checkedGroups.indexOf(group);
-      const checked = index > -1;
+      const isCurrentlyChecked = this.isGroupChecked(group);
 
-      if (checked) {
-        this.checkedGroups.splice(index, 1);
-      } else {
-        this.checkedGroups.push(group)
-      }
-
-      this.avaiableOptions(group).forEach(
-        (permission) => checked
+      this.availableOptions(group).forEach(
+        (permission) => isCurrentlyChecked
           ? this.uncheck(permission.option)
           : this.check(permission.option)
       )

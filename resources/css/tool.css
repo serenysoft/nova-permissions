@@ -5,3 +5,7 @@
   column-count: 2;
   white-space: nowrap;
 }
+
+.search-icon-position {
+  left: 0.75rem; /* equivalent to left-3 */
+}
