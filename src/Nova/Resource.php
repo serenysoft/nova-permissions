@@ -62,7 +62,7 @@ abstract class Resource extends NovaResource
     /**
      * Determines the user resource
      *
-     * @return bool
+     * @return string
      */
     protected function userResource()
     {
